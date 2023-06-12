@@ -8,22 +8,37 @@ function Navbar() {
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
                             {/* <!-- Logo --> */}
-                            <a href="#" className="text-orange-500 text-lg font-bold">Logo</a>
+                            <a href="#" className="text-bkack text-lg font-bold">Logo</a>
                         </div>
                         <div className="hidden md:block">
                             {/* <!-- Nav items --> */}
                             <div className="ml-10 flex items-baseline space-x-4">
-                                <a href="#" className="text-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                                <a href="#" className="text-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</a>
-                                <a href="#" className="text-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</a>
-                                <a href="#" className="text-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Account</a>
+                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</a>
+                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</a>
+                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Account</a>
                             </div>
                         </div>
-                        <div className="hidden md:block">
+                        <div className="hidden md:block w-2/5">
                             {/* <!-- Search input and button --> */}
                             <div className="flex items-center">
-                                <input type="text" placeholder="Search" className="bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 text-sm"></input>
-                                    <button className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">Search</button>
+
+                                    
+                                    {/* serch ka form */}
+                                    
+                                <form className='w-full'>   
+                                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        </div>
+                                        <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required></input>
+                                        <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                                    </div>
+                                </form>
+
+
+
                             </div>
                         </div>
                         <div className="-mr-2 flex md:hidden">

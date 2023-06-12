@@ -1,0 +1,40 @@
+
+
+/* .category{
+    display: flex;
+} */
+
+.itemsOption{
+    width: 280px;
+    min-height: 200px;
+}
+
+.vegies:hover{
+    background: linear-gradient(
+    to right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.2)
+    ),url('../../public/Image/veg11.jpeg');
+}
+
+.vegies{
+    background-image: url('../../public/Image/veg11.jpeg');
+} 
+
+.Fruits{
+    background-image: url('../../public/Image/fruitItem.jpeg');
+}
+
+.Fruits:hover{
+    background: linear-gradient(
+    to right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.2)
+    ),url('../../public/Image/fruitItem.jpeg');
+}
+
+.DryFruits{
+    background-image: url('../../public/Image/dryfruits.jpeg');
+}
+
+.DryFruits:hover{
+    background: linear-gradient(
+    to right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.2)
+    ),url('../../public/Image/dryfruits.jpeg');
+}
