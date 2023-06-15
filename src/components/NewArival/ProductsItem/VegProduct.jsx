@@ -1,20 +1,18 @@
 import React from 'react'
-import ProductCart from './ProductCart'
+import ProductCard from './ProductCard'
 
 function VegProduct() {
     return (
         <div className='w-9/12 my-auto newarivalContainer mb-10'>
             <div className=' flex flex-wrap w-fit justify-between mt-6'>
-                <ProductCart/>
-                <ProductCart/>
-                <ProductCart/>
-                <ProductCart/>
+                <ProductCard/>
+                <ProductCard/>
+                <ProductCard/>
+                <ProductCard/>
 
-                <ProductCart/>
-                <ProductCart/>
-                <ProductCart/>
-                <ProductCart/>
-                <ProductCart/>
+                <ProductCard/>
+                <ProductCard/>
+                <ProductCard/>
             </div>
 
             <div className='bg-gray-200 flex justify-between my-5'>
