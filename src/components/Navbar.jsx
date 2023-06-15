@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
     return (
@@ -8,15 +9,16 @@ function Navbar() {
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
                             {/* <!-- Logo --> */}
-                            <a href="#" className="text-bkack text-lg font-bold">Logo</a>
+                            <Link to="#" className="text-bkack text-lg font-bold">Logo</Link>
                         </div>
                         <div className="hidden md:block">
                             {/* <!-- Nav items --> */}
                             <div className="ml-10 flex items-baseline space-x-4">
-                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</a>
-                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</a>
-                                <a href="#" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Account</a>
+                                <Link to='/' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+                                <Link to='/' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</Link>
+                                <Link to='/' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</Link>
+                                <Link to='/signup' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
+                                <Link to='/login' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
                             </div>
                         </div>
                         <div className="hidden md:block w-2/5">
