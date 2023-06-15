@@ -33,6 +33,7 @@ function Home() {
                     <Footer/>
                 </>
                 :
+                    // Testing compenent just write it here with textPage == True  
                 <ProductDetail/>
             }
 
