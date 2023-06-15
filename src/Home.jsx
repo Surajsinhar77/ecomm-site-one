@@ -11,7 +11,7 @@ import { useState } from 'react'
 
 function Home() {
 
-    const [textpage, setTestpage] = useState(false);
+    const [textpage, setTestpage] = useState(true);
 
 
     const banners = [
