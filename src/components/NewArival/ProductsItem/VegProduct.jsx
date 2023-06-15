@@ -3,7 +3,7 @@ import ProductCart from './ProductCart'
 
 function VegProduct() {
     return (
-        <div className='w-9/12 my-auto newarivalContainer'>
+        <div className='w-9/12 my-auto newarivalContainer mb-10'>
             <div className=' flex flex-wrap w-fit justify-between mt-6'>
                 <ProductCart/>
                 <ProductCart/>
@@ -17,7 +17,7 @@ function VegProduct() {
                 <ProductCart/>
             </div>
 
-            <div className='bg-gray-200 flex justify-between'>
+            <div className='bg-gray-200 flex justify-between my-5'>
                 <div className="one flex h-24 items-center w-1/4">
                     <span className='p-4'>
                     <i class="fa fa-truck fa-2x text-orange-500" aria-hidden="true"></i>
