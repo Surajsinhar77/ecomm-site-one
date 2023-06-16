@@ -12,7 +12,6 @@ function VegProduct() {
                 <Link to='/Productdetail'> <ProductCard/> </Link>
                 <Link to='/Productdetail'> <ProductCard/> </Link>
                 <Link to='/Productdetail'> <ProductCard/> </Link>
-                
             </div>
 
             <div className='bg-gray-200 flex justify-between my-5'>

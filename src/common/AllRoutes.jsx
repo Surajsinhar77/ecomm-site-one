@@ -4,6 +4,7 @@ import Home from '../Home'
 import RegistrationForm from '../components/AuthPage/RegistrationForm'
 import LoginPage from '../components/AuthPage/LoginPage'
 import ProductDetail from '../components/NewArival/ProductsItem/ProductDetail'
+import Cart from '../components/Cart/Cart'
 
 function AllRoutes() {
     return (
@@ -13,6 +14,7 @@ function AllRoutes() {
                 <Route path="/signup" element={<RegistrationForm/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/Productdetail" element={<ProductDetail/>} />
+                <Route path="/cart" element={<Cart/>}/>
             </Routes>
         </>
     )

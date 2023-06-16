@@ -19,6 +19,7 @@ function ProductDetail() {
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?</p>
                 <button className='border border-white px-5 py-3 bg-blue-700 rounded text-white my-4'>FREE DELIVARY</button>
                 <div className="priceNdRating">
+                    <h3 className='text-green-600 text-lg font-bold'>IN STOCK</h3>
                     <h3 className='MRP line-through'> <i className='fa fa-rupee'></i> 80.65</h3>
                     <div className='flex'>
                         <h3 className='sellingPrize text-3xl text-red-600 font-bold mr-4'><i className='fa fa-rupee'></i> 50.54</h3>
