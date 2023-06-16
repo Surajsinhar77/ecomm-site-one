@@ -8,11 +8,9 @@ import ProductDetail from './components/NewArival/ProductsItem/ProductDetail'
 import { useState } from 'react'
 
 
-
 function Home() {
 
     const [textpage, setTestpage] = useState(true);
-
 
     const banners = [
         { imageUrl: "public/Image/veg1.jpeg", altText: 'Banner 1' },
