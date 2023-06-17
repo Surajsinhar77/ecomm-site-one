@@ -1,10 +1,11 @@
 import React from 'react'
+import './style.css'
 
 function RegistrationForm(){
     return(
         <div>
             {/* <!-- component --> */}
-            <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+            <div class="registerMainContainer  p-6 bg-gray-100 flex items-center justify-center">
             <div class="container max-w-screen-lg mx-auto">
                 <div>
                 {/* <h2 class="font-semibold text-xl text-gray-600">Responsive Form</h2>

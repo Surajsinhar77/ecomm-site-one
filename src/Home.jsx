@@ -19,7 +19,7 @@ function Home() {
     ];
 
     return (
-        <div>
+        <div className='mangingHeight'>
             {
                 textpage ? 
 

@@ -3,3 +3,11 @@
 .newarivalContainer{
     margin: 0 auto;
 }
+
+.mangingHeight{
+    min-height: calc(100vh - 64px);
+}
+
+.mainlogindiv{
+    min-height: calc(100vh - 64px);
+}

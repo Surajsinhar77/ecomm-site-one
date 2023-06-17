@@ -1,0 +1,11 @@
+{
+  "name": "ecomm-backend",
+  "version": "1.0.0",
+  "description": "creating Backend application for the ecomm website ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Suraj Kumar",
+  "license": "ISC"
+}

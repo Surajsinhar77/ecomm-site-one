@@ -1,0 +1,6 @@
+
+.ItemInCart{
+    height: calc(80vh + 100px); 
+    overflow-y: auto;
+    height: fit-content;
+}
