@@ -28,13 +28,13 @@ function Home() {
                     <Items/>
                     <NewArival/>
                     <VegProduct/>
-                    <Footer/>
+                    {/* <Footer/> */}
                 </>
                 :
                     // Testing compenent just write it here with textPage == True  
                 <ProductDetail/>
             }
-
+            <Footer/>
         </div>
     )
 }
