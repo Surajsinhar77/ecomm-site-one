@@ -22,7 +22,6 @@ function Home() {
         <div className='mangingHeight'>
             {
                 textpage ? 
-
                 <>
                     <Crousal banners={banners} />
                     <Items/>
