@@ -26,7 +26,7 @@ const userScheme = ()=>{
             required : true,
         },
         pincode:{
-            type: true,
+            type: String,
             require: true,
         }
     })
