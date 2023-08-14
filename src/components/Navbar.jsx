@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {useAuth} from './AuthPage/AuthContext';
 
 function Navbar() {
+    const { isLoggedIn, logout} = useAuth();
+    
+    const handelLogout=()=>{
+        logout();
+    }
     return (
         <div>
             <nav className="bg-green-500">
@@ -18,7 +24,12 @@ function Navbar() {
                                 <Link to='/shop' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</Link>
                                 <Link to='/cart' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</Link>
                                 <Link to='/signup' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
-                                <Link to='/login' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+                                {isLoggedIn ? 
+                                    <Link onClick={handelLogout} className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</Link>
+                                :
+                                    <Link to='/login' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+                                    
+                                }
                             </div>
                         </div>
                         <div className="hidden md:block w-2/5">

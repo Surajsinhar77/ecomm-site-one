@@ -2,16 +2,29 @@ import Navbar from './components/Navbar'
 import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import AllRoutes from './common/AllRoutes'
-// import Home from './Home'
+import {useAuth} from './components/AuthPage/AuthContext';
+import LoginPage from './components/AuthPage/LoginPage';
 
 
 function App() {
+  const {isLoggedIn} =useAuth();
   return (
     <div>
-      <Router>
-        <Navbar/>
-        <AllRoutes/>
-      </Router>
+
+        <Router >
+          {
+            isLoggedIn ?
+              <>
+              <Navbar/>
+              <AllRoutes/>
+              </>
+            :
+            <LoginPage/>
+          }
+        </Router>
+      
+        {/* <LoginPage/> */}
+      
     </div>
   )
 }
