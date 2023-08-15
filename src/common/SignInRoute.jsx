@@ -9,7 +9,7 @@ function SignInRoute() {
         <>
             <Routes>
                 {/* <Route exact path="/" element={<Home/>}/> */}
-                <Route  path="/login" element={<RegistrationForm/>}/>
+                <Route  path="/register" element={<RegistrationForm/>}/>
                 <Route exact path="/" element={<LoginPage/>}/>
             </Routes>
         </>

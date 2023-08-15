@@ -2,3 +2,16 @@
 .registerMainContainer{
     min-height: calc(100vh - 64px);
 }
+
+.bg-gray-100{
+    height: 100%;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.alreadyAcc{
+    font-weight: 500;
+    color: #1D4ed8;
+}
+.alreadyAcc:hover{
+    color: #1D4ed8;
+    text-decoration: underline;
+}
