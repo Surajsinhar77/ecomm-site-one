@@ -23,11 +23,14 @@ function Navbar() {
                                 <Link to='/' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
                                 <Link to='/shop' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</Link>
                                 <Link to='/cart' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</Link>
-                                <Link to='/signup' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
+                                
                                 {isLoggedIn ? 
                                     <Link onClick={handelLogout} className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</Link>
                                 :
-                                    <Link to='/login' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+                                    <>
+                                        <Link to='/signup' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
+                                        <Link to='/login' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+                                    </>
                                     
                                 }
                             </div>

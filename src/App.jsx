@@ -2,8 +2,10 @@ import Navbar from './components/Navbar'
 import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 import AllRoutes from './common/AllRoutes'
-import {useAuth} from './components/AuthPage/AuthContext';
 import LoginPage from './components/AuthPage/LoginPage';
+import SignInRoute  from './common/SignInRoute'
+import {useAuth} from './components/AuthPage/AuthContext';
+
 
 
 function App() {
@@ -15,12 +17,15 @@ function App() {
           {
             isLoggedIn ?
               <>
-              <Navbar/>
-              <AllRoutes/>
+                <Navbar/>
+                <AllRoutes/>
               </>
             :
-            <LoginPage/>
-          }
+              <>
+                {/* <LoginPage/> */}
+                <SignInRoute/>
+              </>
+          } 
         </Router>
       
         {/* <LoginPage/> */}
