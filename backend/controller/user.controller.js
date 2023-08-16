@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-
+const twilio = require('twilio');
 
 // This is the model import for user 
 const userModel = require('../model/user.model')
@@ -63,7 +63,27 @@ const login = async(req, res) =>{
     }
 }
 
+const otpVerification = (req,res) =>{
+    const accountSid = 'AC3f7b4e8f3a603b5aff0ee25376d09846';
+    const authToken = 'e32722fd361963749ce3044812571ceb';
+    const client = twilio(accountSid, authToken);
+    const twilioPhoneNumber = '+16818811978';
+    
+    const randomOTP = req.body.otp;
+    // const randomOTP = Math.floor(100000 + Math.random() * 900000);
+
+    client.messages.create({
+        body: `Your OTP is: ${randomOTP}`,
+        from: twilioPhoneNumber, 
+        to: "+91 7055532539",
+        // to: req.body.phoneno,
+
+    }).then(message => res.status(200).json({ message: 'SMS sent', sid: message.sid }))
+    .catch(error => res.status(500).json({ message: 'Error sending SMS', error: error.message }));
+}
+
 module.exports={
     registerUser,
     login,
+    otpVerification,
 }

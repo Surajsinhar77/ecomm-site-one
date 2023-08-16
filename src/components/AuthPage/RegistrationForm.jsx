@@ -3,8 +3,17 @@ import "./style.css";
 import api from '../api/axios.instance';
 import {useAuth} from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import FlashMessage from 'react-flash-message'
+
+// const Message = () => (
+//     <FlashMessage duration={5000}>
+//       <strong>I will disapper in 5 seconds!</strong>
+//     </FlashMessage>
+//   )
 
 function RegistrationForm() {
+    const [isVisible, setIsVisible] = useState(false);
+    const [message, setMessage] = useState("");
     const [userData, setuserData] = useState({
         fullname: "",
         email: "",
@@ -18,6 +27,14 @@ function RegistrationForm() {
         cnfpassword:'',
     });
 
+        const showFlashMessage = () => {
+            setIsVisible(true);
+            setTimeout(() => {
+                setIsVisible(false);
+            }, 3000); // Flash message disappears after 3 seconds (adjust as needed)
+        };
+
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setuserData((prevData) => ({
@@ -28,15 +45,48 @@ function RegistrationForm() {
     const handelUserData = (e) => {
         e.preventDefault();
         console.log(userData);
-        api.post()
+        api.post('/register',userData).then((res)=>{
+            console.log(res);
+            console.log("user is login sucessfull");
+        }).catch((err)=>{
+            console.log(err);
+            console.log('This is the error msg :'+err.message);
+        })
     };
     console.log(userData);
 
-    
+    const otpHandel = (e) =>{
+        e.preventDefault()
+        if(userData.phoneno.length != 14){
+            setMessage("Incorrect Phone");
+            showFlashMessage();
+        }
+        console.log("check phone no :"+userData);
+        // ,{otp:randomOTP, phoneno : userData.phoneno}
+        const randomOTP = Math.floor(100000 + Math.random() * 900000); //6 digits
+        api.post('/send-otp',{otp:randomOTP,phoneno:userData.phoneno}).then((Response)=>{
+            console.warn(Response);
+            setMessage('Otp sent')
+            showFlashMessage();
+        }).catch((err)=>{
+            console.error(err);
+            setMessage(err.message)
+            showFlashMessage();
+        })
+    }
+
     return (
         <div>
-        {/* <!-- component --> */}
-        <form action="" onSubmit={handelUserData}>
+        
+        {
+            isVisible?
+                <FlashMessage duration={5000}>
+                <strong className="text-green-500">{message}</strong>
+            </FlashMessage>
+            :
+            ""
+        }
+        <form  onSubmit={handelUserData}>
             <div class="registerMainContainer  p-6 bg-gray-100 flex items-center justify-center">
             <div class="container max-w-screen-lg mx-auto">
                 <div>
@@ -68,7 +118,7 @@ function RegistrationForm() {
                         <div class="md:col-span-3">
                             <label for="email">Email Address</label>
                             <input
-                            type="text"
+                            type="email"
                             name="email"
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             placeholder="email@domain.com"
@@ -76,17 +126,26 @@ function RegistrationForm() {
                             onChange={(e)=>handleInputChange(e)}
                             />
                         </div>
-                        <div class="md:col-span-3">
-                            <label for="tel">Phone No</label>
-                            <input
-                            type="tel"
-                            name="phonno"
-                            id="phoneno"
-                            class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                            required
-                            onChange={handleInputChange}
-                            />
-                        </div>
+                        {/* <form onSubmit={otpHandel}> */}
+                            <div class="md:col-span-2">
+                                <label for="tel">Phone No</label>
+                                <input
+                                type="tel"
+                                name="phoneno"
+                                id="phoneno"
+                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                placeholder="+91 1234567890"
+                                required
+                                onChange={handleInputChange}
+                                />
+                            </div> 
+                            <div class="md:col-span-1 flex flex-col">
+                                <label for="tel">OTP Verify</label>
+                                <button onClick={otpHandel} class="bg-green-500 mt-1 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Send
+                                </button>
+                            </div>
+                        {/* </form> */}
                         <div class="md:col-span-2">
                             <label for="tel">OTP</label>
                             <input
