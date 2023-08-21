@@ -5,72 +5,106 @@ import {useAuth} from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import FlashMessage from 'react-flash-message'
 
-// const Message = () => (
-//     <FlashMessage duration={5000}>
-//       <strong>I will disapper in 5 seconds!</strong>
-//     </FlashMessage>
-//   )
 
 function RegistrationForm() {
+    const [genotp, setGenotp] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState("");
-    const [userData, setuserData] = useState({
-        fullname: "",
-        email: "",
-        phoneno:'',
-        address:'',
-        city:'',
-        country:'',
-        state:'',
-        pincode:'',
-        password:'',
-        cnfpassword:'',
-    });
+    const [userData, setUserdata] = useState({});
+
+    const [email,setEmail] = useState();
+    const [fullname,setFullname]  = useState();      
+    const [phoneno,setPhoneno] = useState();
+    const [otp,setOtp] = useState();
+    const [address,setAddress] = useState();
+    const [city,setCity] = useState();
+    const [country,setCountry] = useState();
+    const [state,setState] = useState();
+    const [pincode,setPincode] = useState();
+    const [password,setPassword] = useState();
+    const [cnfpassword,setCnfpassword] = useState();
+
+    // const [userData, setuserData] = useState({
+    //     fullname: "",
+    //     email: "",
+    //     phoneno:'',
+    //     otp:'',
+    //     address:'',
+    //     city:'',
+    //     country:'',
+    //     state:'',
+    //     pincode:'',
+    //     password:'',
+    //     cnfpassword:'',
+    // });
+
+
 
         const showFlashMessage = () => {
             setIsVisible(true);
             setTimeout(() => {
                 setIsVisible(false);
-            }, 3000); // Flash message disappears after 3 seconds (adjust as needed)
+            }, 4000); // Flash message disappears after 3 seconds (adjust as needed)
         };
 
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setuserData((prevData) => ({
-        ...prevData, [name]: value,
-        }));
-    };
+    // const handleInputChange = (e) => {
+    //     e.preventDefault()
+    //     const { name, value } = e.target;
+    //     console.log(name, value);
+    //     setuserData((prevData) => ({
+    //         ...prevData, [name]: value,
+    //     }));
+    //     console.log(userData);
+    // };
+        
+
 
     const handelUserData = (e) => {
-        e.preventDefault();
+        e.preventDefault()
+        setUserdata({fullname:fullname, email:email, phoneno:phoneno, address:address, city:city, country:country, state:state, pincode:pincode, password:password});
         console.log(userData);
-        api.post('/register',userData).then((res)=>{
-            console.log(res);
-            console.log("user is login sucessfull");
-        }).catch((err)=>{
-            console.log(err);
-            console.log('This is the error msg :'+err.message);
-        })
+
+        console.log(cnfpassword+"  "+password);
+        if(password != cnfpassword){
+            setMessage("Password not Match ");
+            showFlashMessage()
+            return 
+        }
+        if(otp == genotp){
+            api.post('/register',userData).then((res)=>{
+                setMessage(res.data.message);
+                showFlashMessage()
+            }).catch((err)=>{
+                setMessage(err.response.data.message);
+                showFlashMessage()
+                console.log(err.response.data.message);
+                console.log('This is the error msg :'+err.response.data.message);
+            })
+        }else{
+            setMessage("Wrong OTP");
+            showFlashMessage();
+        }
     };
-    console.log(userData);
 
     const otpHandel = (e) =>{
         e.preventDefault()
-        if(userData.phoneno.length != 14){
+        if(phoneno.length != 13 || phoneno.length != 14 ){
             setMessage("Incorrect Phone");
             showFlashMessage();
         }
-        console.log("check phone no :"+userData);
-        // ,{otp:randomOTP, phoneno : userData.phoneno}
-        const randomOTP = Math.floor(100000 + Math.random() * 900000); //6 digits
-        api.post('/send-otp',{otp:randomOTP,phoneno:userData.phoneno}).then((Response)=>{
+
+        api.post('/send-otp',{
+            "otp":  Math.floor(100000 + Math.random() * 900000),
+            phoneno:phoneno
+        }).then((Response)=>{
             console.warn(Response);
-            setMessage('Otp sent')
+            setGenotp(Response.data.otpVerify);
+            setMessage('Otp sent');
             showFlashMessage();
         }).catch((err)=>{
             console.error(err);
-            setMessage(err.message)
+            setMessage(err.message);
             showFlashMessage();
         })
     }
@@ -78,21 +112,26 @@ function RegistrationForm() {
     return (
         <div>
         
-        {
-            isVisible?
-                <FlashMessage duration={5000}>
-                <strong className="text-green-500">{message}</strong>
-            </FlashMessage>
-            :
-            ""
-        }
         <form  onSubmit={handelUserData}>
-            <div class="registerMainContainer  p-6 bg-gray-100 flex items-center justify-center">
+            <div class="registerMainContainer  p-6 flex items-center justify-center">
+            
             <div class="container max-w-screen-lg mx-auto">
+                <div  id="flashMsg" className="">
+                    {
+                        isVisible?
+                            <FlashMessage duration={11000}>
+                                <div class="flashMessage p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                    <span class="font-medium">Alert ! </span>{message}
+                                </div>
+                            </FlashMessage>
+                        :
+                        ""
+                    }
+                </div>
                 <div>
                 {/* <h2 class="font-semibold text-xl text-gray-600">Responsive Form</h2>
                     <p class="text-gray-500 mb-6">Form is mobile responsive. Give it a try.</p> */}
-
+                    
                 <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                     <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                     <div class="text-gray-600">
@@ -111,7 +150,7 @@ function RegistrationForm() {
                             name="fullname"
                             type="text"
                             required
-                            onChange={(e) => handleInputChange(e)}
+                            onChange={(e) => setFullname(e.target.value)}
                             />
                         </div>
 
@@ -123,7 +162,7 @@ function RegistrationForm() {
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             placeholder="email@domain.com"
                             required
-                            onChange={(e)=>handleInputChange(e)}
+                            onChange={(e)=>setEmail(e.target.value)}
                             />
                         </div>
                         {/* <form onSubmit={otpHandel}> */}
@@ -136,7 +175,7 @@ function RegistrationForm() {
                                 class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                 placeholder="+91 1234567890"
                                 required
-                                onChange={handleInputChange}
+                                onChange={(e)=>setPhoneno(e.target.value)}
                                 />
                             </div> 
                             <div class="md:col-span-1 flex flex-col">
@@ -152,6 +191,7 @@ function RegistrationForm() {
                             type="tel"
                             name="otp"
                             id="otp"
+                            onChange={(e)=>setOtp(e.target.value)}
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             />
                         </div>
@@ -165,7 +205,7 @@ function RegistrationForm() {
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             placeholder=""
                             required
-                            onChange={(e) => handelUserData(e.target)}
+                            onChange={(e) => setAddress(e.target.value)}
                             />
                         </div>
 
@@ -178,7 +218,7 @@ function RegistrationForm() {
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             placeholder=""
                             required
-                            onChange={(e) => handelUserData(e.target)}
+                            onChange={(e) => setCity(e.target.value)}
                             />
                         </div>
 
@@ -191,7 +231,7 @@ function RegistrationForm() {
                                 placeholder="Country"
                                 class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                                 required
-                                onChange={(e) => handelUserData(e.target)}
+                                onChange={(e) => setCountry(e.target.value)}
                             />
                             <button
                                 tabindex="-1"
@@ -239,7 +279,7 @@ function RegistrationForm() {
                                 placeholder="State"
                                 class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                                 required
-                                onChange={(e) => handelUserData(e.target)}
+                                onChange={(e) => setState(e.target.value)}
                             />
                             <button
                                 tabindex="-1"
@@ -279,7 +319,7 @@ function RegistrationForm() {
                         </div>
 
                         <div class="md:col-span-1">
-                            <label for="zipcode">Zipcode</label>
+                            <label for="zipcode">Pincode</label>
                             <input
                             type="text"
                             name="pincode"
@@ -287,7 +327,7 @@ function RegistrationForm() {
                             class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             placeholder=""
                             required
-                            onChange={(e) => handelUserData(e)}
+                            onChange={(e) => setPincode(e.target.value)}
                             />
                         </div>
 
@@ -306,7 +346,7 @@ function RegistrationForm() {
                             id="password"
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             required
-                            onChange={(e) => handelUserData(e.target)}
+                            onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div class="md:col-span-2">
@@ -317,7 +357,7 @@ function RegistrationForm() {
                             id="cnfpassword"
                             class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                             required
-                            onChange={(e) => handelUserData(e.target)}
+                            onChange={(e) => setCnfpassword(e.target.value)}
                             />
                         </div>
                         <div class="md:col-span-5 text-right flex justify-between items-center">

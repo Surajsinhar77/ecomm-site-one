@@ -9,7 +9,8 @@ const registerUser = async(req, res)=>{
     const registrationInfo = req.body;
     const oldUser = await userModel.findOne({email:req.body.email});
     if(oldUser){
-        res.json({message:"Already user Exist",userExist : true});
+        res.send({message:"Already user Exist",userExist : true});
+        return
     }
 
     const user = new userModel({
@@ -23,10 +24,11 @@ const registerUser = async(req, res)=>{
 
     user.save().then((data)=>{
         res.status(201);
-        res.send({message: "User registered successfully", data});
+        res.send({message: "User registered successfully", data, userExist:true});
     }).catch((err)=>{
         res.status(500).send(({
             message: err.message,
+            error:err
         }));
     })
 }
@@ -70,15 +72,16 @@ const otpVerification = (req,res) =>{
     const twilioPhoneNumber = '+16818811978';
     
     const randomOTP = req.body.otp;
+    console.log(randomOTP);
     // const randomOTP = Math.floor(100000 + Math.random() * 900000);
-
+    console.log(req.body.phoneno);
     client.messages.create({
         body: `Your OTP is: ${randomOTP}`,
-        from: twilioPhoneNumber, 
-        to: "+91 7055532539",
-        // to: req.body.phoneno,
+        from: twilioPhoneNumber,
+        // to: "+91 7055532539",
+        to: req.body.phoneno,
 
-    }).then(message => res.status(200).json({ message: 'SMS sent', sid: message.sid }))
+    }).then(message => res.status(200).json({ message: 'SMS sent', sid: message.sid, otpVerify:randomOTP }))
     .catch(error => res.status(500).json({ message: 'Error sending SMS', error: error.message }));
 }
 
