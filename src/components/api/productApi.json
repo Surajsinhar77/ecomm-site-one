@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name" : "Tomato",
+        "Price": "60",
+        "rating": "4.8",
+        "discription":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?"
+    },
+    {
+        "id": 2,
+        "name" : "Beans",
+        "rating": "4.5",
+        "Price": "50",
+        "discription":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?"
+    },
+    {
+        "id": 3,
+        "name" : "Beatroot",
+        "Price": "70",
+        "rating": "4.7",
+        "discription":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?"
+    },
+    {
+        "id": 4,
+        "name" : "Capsicum",
+        "Price": "40",
+        "rating": "4.7",
+        "discription":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?"
+    },
+    {
+        "id": 5,
+        "name" : "Cabbage",
+        "Price": "80",
+        "rating": "4.8",
+        "discription":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?"
+    },
+    {
+        "id": 5,
+        "name" : "Cabbage",
+        "Price": "80",
+        "rating": "4.8",
+        "discription":"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat inventore repellendus nulla illum, quasi provident consequatur et accusamus sapiente eos?"
+    }
+]
