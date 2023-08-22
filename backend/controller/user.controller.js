@@ -7,30 +7,36 @@ const userModel = require('../model/user.model')
 const registerUser = async(req, res)=>{
     // const {fullname, email, phoneno, address,country, state,city, pincode, password} = res.body;
     const registrationInfo = req.body;
-    const oldUser = await userModel.findOne({email:req.body.email});
-    if(oldUser){
-        res.send({message:"Already user Exist",userExist : true});
-        return
+    try{
+        const oldUser = await userModel.findOne({email:req.body.email});
+        if(oldUser){
+            res.json({message:"Already user Exist",userExist : true});
+            console.log("this one is TRue");
+            return 
+        }else{
+            const user = new userModel({
+                fullname : registrationInfo.fullname,
+                email : registrationInfo.email,
+                phoneno: registrationInfo.phoneno,
+                address: `${registrationInfo.address} ${registrationInfo.city} ${registrationInfo.state} ${registrationInfo.country} ${registrationInfo.pincode}`,
+                pincode : registrationInfo.pincode,
+                password : bcrypt.hashSync(registrationInfo.password, 10),
+            })
+        
+            user.save().then((data)=>{
+                res.status(201);
+                res.send({message: "User registered successfully", data, userExist:true});
+            }).catch((err)=>{
+                res.status(500).send(({
+                    message: err.message,
+                    error:err
+                }));
+            })
+        }
+    }catch(err){
+        console.log(err);
+        res.status(400).send({msg: err});
     }
-
-    const user = new userModel({
-        fullname : registrationInfo.fullname,
-        email : registrationInfo.email,
-        phoneno: registrationInfo.phoneno,
-        address: `${registrationInfo.address} ${registrationInfo.city} ${registrationInfo.state} ${registrationInfo.country} ${registrationInfo.pincode}`,
-        pincode : registrationInfo.pincode,
-        password : bcrypt.hashSync(registrationInfo.password, 10),
-    })
-
-    user.save().then((data)=>{
-        res.status(201);
-        res.send({message: "User registered successfully", data, userExist:true});
-    }).catch((err)=>{
-        res.status(500).send(({
-            message: err.message,
-            error:err
-        }));
-    })
 }
 
 const login = async(req, res) =>{

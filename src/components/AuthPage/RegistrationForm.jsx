@@ -73,7 +73,8 @@ function RegistrationForm() {
         }
         if(otp == genotp){
             api.post('/register',userData).then((res)=>{
-                setMessage(res.data.message);
+                console.log(res)
+                setMessage(res.data);
                 showFlashMessage()
             }).catch((err)=>{
                 setMessage(err.response.data.message);
