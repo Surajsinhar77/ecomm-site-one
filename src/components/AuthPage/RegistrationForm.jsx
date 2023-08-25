@@ -83,17 +83,23 @@ function RegistrationForm() {
             showFlashMessage()
             return 
         }else{
-            console.log("This is the user request Data : ",userData)
-            api.post('/register', userData).then((res)=>{
-                console.log("jiyan")
-                setMessage(res);
-                showFlashMessage()
-            }).catch((err)=>{
-                setMessage(err);
-                showFlashMessage()
-                console.log(err.response.data);
-                console.log('This is the error msg :'+err);
-            })
+        
+            try{
+                console.log(userData)
+                api.post('/register', userData).then((res)=>{
+                    console.log("jiyan")
+                    setMessage(res);
+                    showFlashMessage()
+                }).catch((err)=>{
+                    setMessage(err);
+                    showFlashMessage()
+                    console.log(err.response.data);
+                    console.log('This is the error msg :'+err);
+                })
+
+            }catch(err){
+                console.log(err)
+            }
         }
     }
 
