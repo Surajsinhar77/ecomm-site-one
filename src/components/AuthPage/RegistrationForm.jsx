@@ -4,7 +4,7 @@ import api from '../api/axios.instance'
 import {useAuth} from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-// import FlashMessage from 'react-flash-message'
+import FlashMessage from 'react-flash-message'
 
 
 function RegistrationForm() {
@@ -76,37 +76,25 @@ function RegistrationForm() {
             password:password
         });
         console.log("clicked");
-        // console.log(userData);
 
-        // console.log(cnfpassword+"  "+password);
         if(password != cnfpassword){
             console.log("Password don't match");
             setMessage("Password not Match ");
             showFlashMessage()
             return 
         }else{
-        
-            try{
-                console.log(userData)
-                api.post('/register', userData).then((res)=>{
-                    console.log("jiyan")
-                    setMessage(res);
-                    showFlashMessage()
-                }).catch((err)=>{
-                    setMessage(err);
-                    showFlashMessage()
-                    console.log(err.response.data);
-                    console.log('This is the error msg :'+err);
-                })
-
-            }catch(err){
-                console.log(err)
-            }
+            console.log("This is the user request Data : ",userData)
+            api.post('/register', userData).then((res)=>{
+                console.log("jiyan")
+                setMessage(res);
+                showFlashMessage()
+            }).catch((err)=>{
+                setMessage(err);
+                showFlashMessage()
+                console.log(err.response.data);
+                console.log('This is the error msg :'+err);
+            })
         }
-        // else{
-        //     setMessage("Wrong OTP");
-        //     showFlashMessage();
-        // }
     }
 
     const otpHandel = (e) =>{
@@ -139,16 +127,16 @@ function RegistrationForm() {
             
             <div className="container max-w-screen-lg mx-auto">
                 <div  id="flashMsg" className="">
-                    {/* {
+                    {
                         isVisible?
-                            // <FlashMessage duration={11000}>
-                            //     <div className="flashMessage p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                            //         <span className="font-medium">Alert ! </span>{message}
-                            //     </div>
-                            // </FlashMessage>
+                            <FlashMessage duration={11000}>
+                                <div className="flashMessage p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                    <span className="font-medium">Alert ! </span>{message}
+                                </div>
+                            </FlashMessage>
                         :
                         ""
-                    } */}
+                    }
                 </div>
                 <div>
                 {/* <h2 class="font-semibold text-xl text-gray-600">Responsive Form</h2>

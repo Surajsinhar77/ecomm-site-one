@@ -11,10 +11,14 @@ const registerUser = async(req, res)=>{
     // const {fullname, email, phoneno, address,country, state,city, pincode, password} = res.body;
     const registrationInfo = req.body;
     try{
+        const plainPassword = registrationInfo.password;
+        const saltRounds = 10;
+        const hashIngPass = bcrypt.hashSync(plainPassword, saltRounds);
+
         const oldUser = await userModel.findOne({email:req.body.email});
         if(oldUser){
             res.json({message:"Already user Exist",userExist : true});
-            console.log("this one is TRue");
+            console.log("Already user Exis");
             return 
         }else{
             const user = new userModel({
@@ -23,12 +27,13 @@ const registerUser = async(req, res)=>{
                 phoneno: registrationInfo.phoneno,
                 address: `${registrationInfo.address} ${registrationInfo.city} ${registrationInfo.state} ${registrationInfo.country} ${registrationInfo.pincode}`,
                 pincode : registrationInfo.pincode,
-                password : bcrypt.hashSync(registrationInfo.password, 10),
+                password : hashIngPass
             })
         
             user.save().then((data)=>{
                 res.status(201);
                 res.send({message: "User registered successfully", data, userExist:true});
+                console.log("User registered successfully")
             }).catch((err)=>{
                 res.status(500).send(({
                     message: err.message,
@@ -38,8 +43,9 @@ const registerUser = async(req, res)=>{
         }
     }catch(err){
         console.log(err);
-        res.status(400).send({msg: err});
-    }
+        res.status(400).send({msg: err , message : "Password hashing sync Error"});
+        return;
+    };
     console.log("At last ")
 }
 
