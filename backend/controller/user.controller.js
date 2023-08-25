@@ -5,6 +5,8 @@ const twilio = require('twilio');
 const userModel = require('../model/user.model')
 
 const registerUser = async(req, res)=>{
+    console.log(req.body);
+    
     // const {fullname, email, phoneno, address,country, state,city, pincode, password} = res.body;
     const registrationInfo = req.body;
     try{
@@ -37,6 +39,7 @@ const registerUser = async(req, res)=>{
         console.log(err);
         res.status(400).send({msg: err});
     }
+    console.log("At last ")
 }
 
 const login = async(req, res) =>{
