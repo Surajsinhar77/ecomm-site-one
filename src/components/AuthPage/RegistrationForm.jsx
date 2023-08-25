@@ -86,7 +86,7 @@ function RegistrationForm() {
             return 
         }else{
         
-            // try{
+            try{
                 console.log(userData)
                 api.post('/register', userData).then((res)=>{
                     console.log("jiyan")
@@ -95,13 +95,13 @@ function RegistrationForm() {
                 }).catch((err)=>{
                     setMessage(err);
                     showFlashMessage()
-                    console.log(err);
+                    console.log(err.response.data);
                     console.log('This is the error msg :'+err);
                 })
 
-            // }catch(err){
-                // console.log(err)
-            // }
+            }catch(err){
+                console.log(err)
+            }
         }
         // else{
         //     setMessage("Wrong OTP");
