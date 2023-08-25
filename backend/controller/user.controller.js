@@ -1,12 +1,13 @@
 const bcrypt = require('bcrypt')
 const twilio = require('twilio');
+const parms = require('./parms.json')
 
 // This is the model import for user 
 const userModel = require('../model/user.model')
 
 const registerUser = async(req, res)=>{
     console.log(req.body);
-    
+
     // const {fullname, email, phoneno, address,country, state,city, pincode, password} = res.body;
     const registrationInfo = req.body;
     try{
@@ -75,8 +76,8 @@ const login = async(req, res) =>{
 }
 
 const otpVerification = (req,res) =>{
-    const accountSid = 'AC3f7b4e8f3a603b5aff0ee25376d09846';
-    const authToken = 'e32722fd361963749ce3044812571ceb';
+    const accountSid = parms.accountSid;
+    const authToken = parms.authTokengit;
     const client = twilio(accountSid, authToken);
     const twilioPhoneNumber = '+16818811978';
     
