@@ -6,13 +6,7 @@ const getCartSchema = ()=>{
             type:String,
             unique:true
         },
-
-        productName: {
-            type:String,
-            unique:true
-        },
-
-        quantity :{
+        quantity:{
             type:Number,
             unique:false
         }
