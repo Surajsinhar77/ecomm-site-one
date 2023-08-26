@@ -32,10 +32,10 @@ const registerUser = async(req, res)=>{
         
             user.save().then((data)=>{
                 res.status(201);
-                res.send({message: "User registered successfully", data, userExist:true});
+                res.json({message: "User registered successfully", data, userExist:true});
                 console.log("User registered successfully")
             }).catch((err)=>{
-                res.status(500).send(({
+                res.status(500).json(({
                     message: err.message,
                     error:err
                 }));
@@ -43,7 +43,7 @@ const registerUser = async(req, res)=>{
         }
     }catch(err){
         console.log(err);
-        res.status(400).send({msg: err , message : "Password hashing sync Error"});
+        res.status(400).json({msg: err , message : "Password hashing sync Error"});
         return;
     };
     console.log("At last ")
@@ -56,28 +56,28 @@ const login = async(req, res) =>{
         if(userCheack){
             bcrypt.compare(userInfo.password, userCheack.password).then((result)=>{
                 if(result){
-                    res.status(200).send({
+                    res.status(200).json({
                         result: result,
                         userdata: userCheack,
                         userExist : true,
                         msg: "You are sucessfull Login ",
                     })
                 }else{
-                    res.status(200).send({
+                    res.status(200).json({
                         userExist : result,
                         msg: "Invalid Cridential",
                     })
                 }
             }).catch((err)=>{
                 console.log({Message:err.message});
-                res.status(400).send(err);
+                res.status(400).json(err);
             })
         }else{
-            res.status(200).send({msg: "Email Dosn't Exist"});
+            res.status(200).json({msg: "Email Dosn't Exist"});
         }
     }catch(err){
         console.log(err);
-        res.status(400).send({msg: err});
+        res.status(400).json({msg: err});
     }
 }
 
