@@ -16,7 +16,7 @@ const getCartSchema = ()=>{
             type:Number,
             unique:false
         }
-
-        
     })
+    return cartSchema;
 }
+module.exports = mongoose.model('cartItems', getCartSchema());
