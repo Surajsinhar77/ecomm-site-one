@@ -17,3 +17,4 @@ const connectionFuntion = require("./db/connection");
 connectionFuntion();
 
 require(path.join(__dirname, "./routes/user.router"))(app);
+require(path.join(__dirname, "./routes/product.router"))(app);
