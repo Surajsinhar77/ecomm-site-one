@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { stringify } = require('postcss');
 
 const products = () =>{
     const productItems = mongoose.Schema({
@@ -20,7 +19,7 @@ const products = () =>{
             type:Number,  
         },
         sellingPrice:{
-            type:Number
+            type:Number,
         },
 
         mainImage:{
@@ -29,19 +28,15 @@ const products = () =>{
         },
         otherImages1:{
             type:String,
-            unique : true,
         },
         otherImages2:{
             type:String,
-            unique : true,
         },
         otherImages3:{
             type:String,
-            unique : true,
         },
         otherImages4:{
             type:String,
-            unique : true,
         },
     })
     return productItems;

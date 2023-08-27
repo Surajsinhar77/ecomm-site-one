@@ -1,4 +1,4 @@
-const { response } = require("express");
+
 const productModel = require("../model/product.model");
 
 const addProducts = async(req, res)=>{
@@ -24,10 +24,17 @@ const addProducts = async(req, res)=>{
     }
 }
 
-const updateProductData = (req, res) =>{
+// const updateProductData = (req, res) =>{
     
+// }
+
+const getData = async(req, res) =>{
+    const data = await productModel.find({});
+    res.json(data);
+    console.log(data)
 }
 
 module.exports ={
     addProducts,
+    getData,
 }

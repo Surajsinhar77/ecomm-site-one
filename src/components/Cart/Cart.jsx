@@ -38,7 +38,6 @@ function Cart() {
                     </div>
         </div>
         </>
-
     )
 }
 
