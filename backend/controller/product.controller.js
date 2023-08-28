@@ -1,4 +1,4 @@
-
+const mongoose = require('mongoose')
 const productModel = require("../model/product.model");
 
 const addProducts = async(req, res)=>{
@@ -31,10 +31,21 @@ const addProducts = async(req, res)=>{
 const getData = async(req, res) =>{
     const data = await productModel.find({});
     res.json(data);
-    console.log(data)
 }
 
-module.exports ={
+const getOneData = async(req, res) => {
+    const _id = req.body;
+    try{
+        const productId = new mongoose.Types.ObjectId(_id);
+        const oneData = await productModel.findById(productId);
+        res.status(200).json(oneData);
+    }catch(err){
+        console.log(err);
+    }
+}
+
+module.exports = {
     addProducts,
     getData,
+    getOneData,
 }

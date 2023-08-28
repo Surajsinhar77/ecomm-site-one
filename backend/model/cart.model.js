@@ -6,7 +6,7 @@ const getCartSchema = ()=>{
             type:String,
             unique:true
         },
-        
+
         quantity:{
             type:Number,
             unique:false

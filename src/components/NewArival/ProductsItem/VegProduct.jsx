@@ -11,7 +11,6 @@ function VegProduct() {
     useEffect(()=>{
         api.post('/admin/getData').then((res)=>{
             setProducts(res.data);
-            console.log(typeof(products));
             return
         }).catch((err)=>{
             console.log(err.message);
@@ -23,7 +22,7 @@ function VegProduct() {
             <div className=' grid grid-cols-3 gap-3 w-fit mt-6 m-auto'>
                 {
                     products.map(product => (
-                        <Link to='/Productdetail'> <ProductCard key={product._id} product={product} /></Link>
+                        <Link to={`/Productdetail/${product._id}`} > <ProductCard key={product._id} product={product} /></Link>
                     ))
                 }
             </div>
