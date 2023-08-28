@@ -12,7 +12,15 @@ function ProductDetail() {
     const [product, setProduct] = useState();
 
     // for rating 
-    
+    const addToCartFunction = (e) =>{
+        e.preventDefault();
+        api.post(`/cart/addToCart/${_id}`, {productId:_id, quantity:1}).then((res)=>{
+            console.log(res)
+            console.log("item SucessFull Added to cart");
+        }).catch((err)=>{
+            console.log(err.message)
+        })
+    } 
 
 
     useEffect(()=>{
@@ -81,7 +89,7 @@ function ProductDetail() {
                 </div>
 
                 <div className="buyingOption">
-                    <button className='border border-gray-500 px-5 py-3 mr-3 bg-white rounded text-gray-700 my-4 hover:bg-blue-600 hover:text-white'>ADD TO CART</button>
+                    <button onClick={addToCartFunction} className='border border-gray-500 px-5 py-3 mr-3 bg-white rounded text-gray-700 my-4 hover:bg-blue-600 hover:text-white'>ADD TO CART</button>
                     <button className='border border-gray-500 px-5 py-3 mr-3 bg-white rounded text-gray-700 my-4 hover:bg-blue-600 hover:text-white'>BUY NOW</button>
                     <button className='wishlist border border-gray-500 px-5 py-3 mr-3 bg-white rounded text-gray-700 my-4 hover:bg-red-600 hover:text-white'><i class="fa fa-heart-o fa-lg" aria-hidden="true"></i></button>
                 </div>

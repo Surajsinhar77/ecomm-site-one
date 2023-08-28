@@ -18,3 +18,4 @@ connectionFuntion();
 
 require(path.join(__dirname, "./routes/user.router"))(app);
 require(path.join(__dirname, "./routes/product.router"))(app);
+require(path.join(__dirname, "./routes/cart.router"))(app);

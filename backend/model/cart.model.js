@@ -9,7 +9,6 @@ const getCartSchema = ()=>{
 
         quantity:{
             type:Number,
-            unique:false
         }
     })
     return cartSchema;

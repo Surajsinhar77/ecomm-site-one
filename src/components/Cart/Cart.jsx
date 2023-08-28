@@ -1,19 +1,31 @@
 import React from 'react'
 import CartItem from './CartItem'
 import './cart.css'
+import api from '../api/axios.instance'
+import { useEffect, useState } from 'react'
 
-function Cart() {
+function Cart() {  
+    const [cartProduct, getCartData] =useState([]);
+    useEffect(()=>{
+        api.post('/cart/cartItems').then((res)=>{
+            getCartData(res)
+        }).catch((err)=>{
+            console.log(err);
+        })
+    })
     return (
         <>
             <h1 className='text-center text-3xl mt-7 '>Your Shopping cart </h1>
 
         <div className='m-auto mt-7 flex justify-evenly'>
                 <div className="ItemInCart border w-4/6 p-10  scroll-container scroll-container h-[75vh] overflow-y-scroll relative">
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
+                    {
+                        cartProduct.map(item=>(
+                            <CartItem productId ={item} />
+                        ))
+                    }
+                    
+                    
                 </div>
                 <div className='totalFinalPrice  items-center sticky border border-gray-300 p-7 h-fit'>
                     <div className='flex flex-col justify-end'>
