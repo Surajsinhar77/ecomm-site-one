@@ -7,12 +7,18 @@ import { useEffect, useState } from 'react'
 function Cart() {  
     const [cartProduct, getCartData] =useState([]);
     useEffect(()=>{
-        api.post('/cart/cartItems').then((res)=>{
-            getCartData(res)
+        api.get('/cart/cartItems').then((res)=>{
+            getCartData(res.data)
         }).catch((err)=>{
             console.log(err);
         })
-    })
+    },[])
+    console.log(cartProduct);
+    if(!cartProduct){
+        <>
+            loding..
+        </>
+    }
     return (
         <>
             <h1 className='text-center text-3xl mt-7 '>Your Shopping cart </h1>

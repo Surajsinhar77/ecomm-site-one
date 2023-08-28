@@ -32,13 +32,9 @@ const addToCart = async(req, res)=>{
 }
 
 const getCartItem = async(req, res) =>{
-    const data = await cartModel.find({});
-    data.then((resp)=>{
-        res.json(resp);
-    }).catch((err)=>{
-        console.log(err.message)
-        res.json(err);
-    })
+    const data = await cartModel.find();
+    console.log(data)
+    res.json(data)
 }
 
 module.exports={

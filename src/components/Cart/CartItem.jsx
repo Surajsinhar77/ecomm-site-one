@@ -1,17 +1,34 @@
 import React from 'react'
+import api from '../api/axios.instance'
+import { useState, useEffect } from 'react';
 
-function CartItem() {
+function CartItem({productId}) {
+    console.log("This is Product Id ",productId.productId)
+
+    const[product, setProduct] =useState();
+    useEffect(()=>{
+        api.post(`/getProduct/:${productId.productId}`,{id:productId.productId}).then((res)=>{
+            setProduct(res.data);
+        }).catch((err)=>{
+            console.log(err.message)
+        })
+    },[])
+
+    console.log("product is Undifine : ",product)
+    if(!product){
+        <div>Loding...</div>
+    }
     return (
         <div className="cartItem border my-4 pt-10 pb-5 px-10">
             <div className='row flex  justify-between '>
                 <div className="col flex">
                     <div className='w-32  object-cover'>
-                        <img src="../../../public/Image/veg1.jpeg" alt="" />
+                        <img src={`../../../public/productImage/}`} alt="" />
                     </div>
                     <div className="iteminfo p-7 text-center ">
                         <ul>
                             <li>Name : Onion</li>
-                            <li>QNT : 2kg</li>
+                            <li>QNT : {productId.quantity} kg</li>
                             <li>Price : 150rs</li>
                         </ul>
                     </div>
