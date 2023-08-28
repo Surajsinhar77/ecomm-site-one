@@ -3,11 +3,11 @@ import api from '../api/axios.instance'
 import { useState, useEffect } from 'react';
 
 function CartItem({productId}) {
-    console.log("This is Product Id ",productId.productId)
+    console.log("This is Product Id ",productId)
 
     const[product, setProduct] =useState();
     useEffect(()=>{
-        api.post(`/getProduct/:${productId.productId}`,{id:productId.productId}).then((res)=>{
+        api.post(`/getProduct/:${productId.productId}`,{_id:productId.productId}).then((res)=>{
             setProduct(res.data);
         }).catch((err)=>{
             console.log(err.message)
