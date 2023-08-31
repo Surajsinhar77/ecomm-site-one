@@ -2,7 +2,12 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-app.use(cors());
+app.use(cors(
+{
+    	origin: ["https:// ecomm-site-one-api.vercel.app"],
+    	methods: ["POST", "GET"],
+    	credentials: true
+}));
 app.use(express.json());
 
 const path = require('path');
