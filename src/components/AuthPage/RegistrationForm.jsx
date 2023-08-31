@@ -4,7 +4,7 @@ import api from '../api/axios.instance'
 import {useAuth} from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import FlashMessage from 'react-flash-message'
+// import FlashMessage from 'react-flash-message'
 
 
 function RegistrationForm() {
@@ -133,7 +133,7 @@ function RegistrationForm() {
             
             <div className="container max-w-screen-lg mx-auto">
                 <div  id="flashMsg" className="">
-                    {
+                    {/* {
                         isVisible?
                             <FlashMessage duration={11000}>
                                 <div className="flashMessage p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -142,7 +142,7 @@ function RegistrationForm() {
                             </FlashMessage>
                         :
                         ""
-                    }
+                    } */}
                 </div>
                 <div>
                 {/* <h2 class="font-semibold text-xl text-gray-600">Responsive Form</h2>
