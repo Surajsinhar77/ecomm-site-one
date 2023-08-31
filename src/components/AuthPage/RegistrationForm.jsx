@@ -4,7 +4,6 @@ import api from '../api/axios.instance'
 import {useAuth} from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-// import FlashMessage from 'react-flash-message'
 
 
 function RegistrationForm() {
