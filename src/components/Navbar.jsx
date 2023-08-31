@@ -21,11 +21,14 @@ function Navbar() {
                             {/* <!-- Nav items --> */}
                             <div className="ml-10 flex items-baseline space-x-4">
                                 <Link to='/' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-                                <Link to='/shop' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</Link>
-                                <Link to='/cart' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Cart</Link>
+                                <Link to='/shop' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"> <i class="fa fa-shopping-basket" aria-hidden="true"></i> Shop</Link>
+                                <Link to='/cart' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</Link>
                                 
                                 {isLoggedIn ? 
+                                    <>
                                     <Link onClick={handelLogout} className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</Link>
+                                    <Link to="/profile" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"><i class="fa fa-user-circle" aria-hidden="true"></i> Profile </Link>
+                                    </>
                                 :
                                     <>
                                         <Link to='/signup' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
@@ -33,7 +36,9 @@ function Navbar() {
                                     </>
                                     
                                 }
+
                             </div>
+                            
                         </div>
                         <div className="hidden md:block w-2/5">
                             {/* <!-- Search input and button --> */}

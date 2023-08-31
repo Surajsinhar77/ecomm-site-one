@@ -3,33 +3,44 @@ import api from '../api/axios.instance'
 import { useState, useEffect } from 'react';
 
 function CartItem({productId}) {
-    console.log("This is Product Id ",productId)
+    console.log("This is Product Id ",productId.productId)
 
     const[product, setProduct] =useState();
     useEffect(()=>{
-        api.post(`/getProduct/:${productId.productId}`,{_id:productId.productId}).then((res)=>{
+        api.post(`/getProduct/${productId.productId}`, {id:productId.productId} ).then((res)=>{
             setProduct(res.data);
         }).catch((err)=>{
             console.log(err.message)
         })
-    },[])
+    },[product])
 
     console.log("product is Undifine : ",product)
     if(!product){
-        <div>Loding...</div>
+        return (<div>Loding...</div>)
     }
+
+    const RemoveItem = (e)=>{
+        e.preventDefault();
+        console.log(productId.productId)
+        api.post(`/cart/removeItem/${productId.productId}`, {id:productId.productId}).then((res)=>{
+            console.log(res.data);
+        }).catch((err)=>{
+            console.log(err.message)
+        })
+    }
+
     return (
         <div className="cartItem border my-4 pt-10 pb-5 px-10">
             <div className='row flex  justify-between '>
                 <div className="col flex">
                     <div className='w-32  object-cover'>
-                        <img src={`../../../public/productImage/}`} alt="" />
+                        <img src={`../../../public/productImage/${product.mainImage}`} alt="" />
                     </div>
                     <div className="iteminfo p-7 text-center ">
                         <ul>
-                            <li>Name : Onion</li>
+                            <li>Name : {product.productName}</li>
                             <li>QNT : {productId.quantity} kg</li>
-                            <li>Price : 150rs</li>
+                            <li>Price : &#8377;{product.sellingPrice}</li>
                         </ul>
                     </div>
                 </div>
@@ -53,7 +64,7 @@ function CartItem({productId}) {
                 </div>
             </div>
             <div className="row ">
-                <button className='border border-gray-600 px-2 py-1 mr-4 bg-white rounded text-gray-600 my-4 hover:bg-gray-500 hover:text-white hover:border-green-500'>Remove From Cart</button>
+                <button onClick={RemoveItem} className='border border-gray-600 px-2 py-1 mr-4 bg-white rounded text-gray-600 my-4 hover:bg-gray-500 hover:text-white hover:border-green-500'>Remove From Cart</button>
                 <button className='border border-gray-600 px-2 py-1 bg-white rounded text-gray-600 my-4 hover:bg-gray-500 hover:text-white hover:border-green-500'>Share</button>
             </div>
         </div>

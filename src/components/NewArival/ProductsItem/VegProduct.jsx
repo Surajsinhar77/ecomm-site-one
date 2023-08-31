@@ -15,7 +15,7 @@ function VegProduct() {
         }).catch((err)=>{
             console.log(err.message);
         })
-    },products)
+    },[products])
 
     return (
         <div className='w-full my-auto newarivalContainer mb-10'>

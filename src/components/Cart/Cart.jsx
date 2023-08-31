@@ -12,11 +12,11 @@ function Cart() {
         }).catch((err)=>{
             console.log(err);
         })
-    },[])
-    console.log(cartProduct);
+    },[cartProduct])
+
     if(!cartProduct){
         <>
-            loding..
+            loding...
         </>
     }
     return (
@@ -27,10 +27,9 @@ function Cart() {
                 <div className="ItemInCart border w-4/6 p-10  scroll-container scroll-container h-[75vh] overflow-y-scroll relative">
                     {
                         cartProduct.map(item=>(
-                            <CartItem productId ={item} />
+                            <CartItem productId={item}/>
                         ))
                     }
-                    
                     
                 </div>
                 <div className='totalFinalPrice  items-center sticky border border-gray-300 p-7 h-fit'>

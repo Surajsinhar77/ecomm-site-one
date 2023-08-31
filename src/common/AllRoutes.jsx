@@ -1,11 +1,13 @@
 import React from 'react'
-import {Routes, Route, useParams} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 import Home from '../Home'
 import RegistrationForm from '../components/AuthPage/RegistrationForm'
 import LoginPage from '../components/AuthPage/LoginPage'
 import ProductDetail from '../components/NewArival/ProductsItem/ProductDetail'
 import Cart from '../components/Cart/Cart'
 import Shop from '../components/shop/Shop'
+import Profile from './Profile/Profile'
+import Mydetail from './Profile/Mydetail'
 
 
 function AllRoutes() {
@@ -20,6 +22,7 @@ function AllRoutes() {
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/Productdetail/:_id" element={<ProductDetail/>} />
                 <Route path="/cart" element={<Cart/>}/>
+                <Route path="/profile" element={<Profile/>} />
             </Routes>
         </>
     )

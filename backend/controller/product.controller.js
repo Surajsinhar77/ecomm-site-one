@@ -35,7 +35,7 @@ const getData = async(req, res) =>{
 
 const getOneData = async(req, res) => {
     const _id = req.body;
-    console.log(_id);
+    // console.log("This is the id from body : ", _id);
     try{
         const productId = new mongoose.Types.ObjectId(_id);
         const oneData = await productModel.findById(productId);
