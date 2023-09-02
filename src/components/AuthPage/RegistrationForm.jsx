@@ -3,7 +3,8 @@ import "./style.css";
 import api from '../api/axios.instance'
 import {useAuth} from './AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function RegistrationForm() {
@@ -57,7 +58,20 @@ function RegistrationForm() {
     //     }));
     //     console.log(userData);
     // };
-        
+    const notify = async(message)=>{
+        console.log(message)
+        const  Noti =()=>{
+            toast.success(message, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            })
+            // navigate("/register");
+        }
+        setTimeout(()=>{
+            Noti();
+            
+        },1000)
+    }
 
 
     const handelUserData = (e) => {
@@ -78,24 +92,19 @@ function RegistrationForm() {
 
         if(password != cnfpassword){
             console.log("Password don't match");
-            setMessage("Password not Match ");
-            showFlashMessage()
+            notify("Password not Match ");
             return 
         }else{
         
             try{
                 console.log(userData)
                 api.post('/register', userData).then((res)=>{
-                    console.log("jiyan")
-                    setMessage(res);
-                    showFlashMessage()
+                    setMessage(res.data.message);
+                    notify(message);
                 }).catch((err)=>{
-                    setMessage(err);
-                    showFlashMessage()
-                    console.log(err.response.data);
-                    console.log('This is the error msg :'+err);
+                    notify(err.response.data.message);
+                    console.log(err.response.data.message);
                 })
-
             }catch(err){
                 console.log(err)
             }
@@ -106,7 +115,6 @@ function RegistrationForm() {
         e.preventDefault()
         if(phoneno.length != 13 || phoneno.length != 14 ){
             setMessage("Incorrect Phone");
-            showFlashMessage();
         }
 
         api.post('/send-otp',{
@@ -120,7 +128,7 @@ function RegistrationForm() {
         }).catch((err)=>{
             console.error(err);
             setMessage(err.message);
-            showFlashMessage();
+            
         })
     }
 
@@ -396,8 +404,8 @@ function RegistrationForm() {
                 </div>
                 </div>
 
-                <a
-                href="https://www.buymeacoffee.com/dgauderman"
+                <Link
+                
                 target="_blank"
                 className="md:absolute bottom-0 right-0 p-4 float-right"
                 >
@@ -406,10 +414,11 @@ function RegistrationForm() {
                     alt="Buy Me A Coffee"
                     className="transition-all rounded-full w-14 -rotate-45 hover:shadow-sm shadow-lg ring hover:ring-4 ring-white"
                 />
-                </a>
+                </Link>
             </div>
             </div>
         </form>
+        <ToastContainer />
         </div>
     );
 }

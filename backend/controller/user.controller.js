@@ -6,47 +6,26 @@ const parms = require('./parms.json')
 const userModel = require('../model/user.model')
 
 const registerUser = async(req, res)=>{
-    console.log(req.body);
-
-    // const {fullname, email, phoneno, address,country, state,city, pincode, password} = res.body;
-    const registrationInfo = req.body;
-    try{
-        const plainPassword = registrationInfo.password;
-        const saltRounds = 10;
-        const hashIngPass = bcrypt.hashSync(plainPassword, saltRounds);
-
-        const oldUser = await userModel.findOne({email:req.body.email});
-        if(oldUser){
-            res.json({message:"Already user Exist",userExist : true});
-            console.log("Already user Exis");
-            return 
-        }else{
-            const user = new userModel({
-                fullname : registrationInfo.fullname,
-                email : registrationInfo.email,
-                phoneno: registrationInfo.phoneno,
-                address: `${registrationInfo.address} ${registrationInfo.city} ${registrationInfo.state} ${registrationInfo.country} ${registrationInfo.pincode}`,
-                pincode : registrationInfo.pincode,
-                password : hashIngPass
-            })
-        
-            user.save().then((data)=>{
-                res.status(201);
-                res.json({message: "User registered successfully", data, userExist:true});
-                console.log("User registered successfully")
-            }).catch((err)=>{
-                res.status(500).json(({
-                    message: err.message,
-                    error:err
-                }));
-            })
+    try {
+        const {fullname, phoneno,address,city, country,state, pincode ,email, password } = req.body;
+    
+        // Check if the user already exists
+        const existingUser = await userModel.findOne({ $or: [{ fullname }, { email }] });
+        if (existingUser) {
+            return res.status(409).json({ message: 'User already exists' });
         }
-    }catch(err){
-        console.log(err);
-        res.status(400).json({msg: err , message : "Password hashing sync Error"});
-        return;
-    };
-    console.log("At last ")
+    
+        // Hash the password before saving it
+        const hashedPassword = await bcrypt.hash(password, 10);
+    
+        // Create a new user with the hashed password
+        const user = new userModel({ fullname, phoneno,address,city, country,state, pincode ,email, password:hashedPassword });
+        await user.save();
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
 }
 
 const login = async(req, res) =>{

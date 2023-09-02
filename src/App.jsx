@@ -7,6 +7,7 @@ import SignInRoute  from './common/SignInRoute'
 import {useAuth} from './components/AuthPage/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 
 
@@ -14,17 +15,21 @@ function App() {
   const {isLoggedIn} = useAuth();
 
   const notify = (message)=>{
-    // console.log(message)
-    // const  Noti =()=>{
+    
+    const  Noti =()=>{
         toast.success(message, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
         })
-    // }
-    // setTimeout(()=>{
-    //     Noti();
-    // },1000)
+    }
+    setTimeout(()=>{
+        Noti();
+    },1000)
   }
+  
+  useEffect(()=>{
+    notify()
+  },[isLoggedIn]);
 
   return (
     <div>
@@ -33,9 +38,6 @@ function App() {
             isLoggedIn ?
 
               <>
-              {
-                notify("SucessFull Login")
-              }
                 <Navbar />
                 <AllRoutes/>
               </>
