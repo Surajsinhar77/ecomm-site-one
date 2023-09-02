@@ -65,7 +65,7 @@ const login = async(req, res) =>{
                 }else{
                     res.status(200).json({
                         userExist : result,
-                        msg: "Invalid Cridential",
+                        msg: "Invalid Password",
                     })
                 }
             }).catch((err)=>{
@@ -73,7 +73,7 @@ const login = async(req, res) =>{
                 res.status(400).json(err);
             })
         }else{
-            res.status(200).json({msg: "Email Dosn't Exist"});
+            res.status(200).json({msg: "Email Dosn't Exist", userExist: false});
         }
     }catch(err){
         console.log(err);

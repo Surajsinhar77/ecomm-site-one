@@ -8,6 +8,7 @@ import Cart from '../components/Cart/Cart'
 import Shop from '../components/shop/Shop'
 import Profile from './Profile/Profile'
 import Mydetail from './Profile/Mydetail'
+import PageNotFound from '../components/PageNotFound'
 
 
 function AllRoutes() {
@@ -23,6 +24,7 @@ function AllRoutes() {
                 <Route path="/Productdetail/:_id" element={<ProductDetail/>} />
                 <Route path="/cart" element={<Cart/>}/>
                 <Route path="/profile" element={<Profile/>} />
+                <Route path="*" element={<PageNotFound/>} />
             </Routes>
         </>
     )

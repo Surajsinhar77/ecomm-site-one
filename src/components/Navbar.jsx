@@ -1,29 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {useAuth} from './AuthPage/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import {getItem} from './AuthPage/AuthContext';
+
 
 function Navbar() {
     const { isLoggedIn, logout} = useAuth();
-    
+    const navigate = useNavigate();
     const handelLogout=()=>{
         logout();
+        navigate('/');
     }
+
+    const {cartItem} =getItem();
+
     return (
-        <div>
+        <div className="sticky top-0 left-0 right-0">
             <nav className="bg-green-500">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
                             {/* <!-- Logo --> */}
-                            <Link to="#" className="text-bkack text-lg font-bold">Logo</Link>
+                            <Link to="#" className="text-bkack text-lg font-bold">VegMarket</Link>
                         </div>
                         <div className="hidden md:block">
                             {/* <!-- Nav items --> */}
                             <div className="ml-10 flex items-baseline space-x-4">
                                 <Link to='/' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
                                 <Link to='/shop' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"> <i class="fa fa-shopping-basket" aria-hidden="true"></i> Shop</Link>
-                                <Link to='/cart' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</Link>
-                                
+                                <Link to='/cart' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"> 
+                                <span className='w-7 h-7 rounded-full  bg-slate-400 text-red-600'>{cartItem}</span>
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart 
+                                </Link>
                                 {isLoggedIn ? 
                                     <>
                                     <Link onClick={handelLogout} className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</Link>
@@ -76,10 +85,10 @@ function Navbar() {
                 {/* <!-- Mobile menu --> */}
                 <div className="hidden md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <a href="#" className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                        <a href="#" className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Shop</a>
-                        <a href="#" className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Cart</a>
-                        <a href="#" className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Account</a>
+                        <Link  className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+                        <Link  className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Shop</Link>
+                        <Link  className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Cart</Link>
+                        <Link  className="text-orange-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Account</Link>
                     </div>
                 </div>
             </nav>

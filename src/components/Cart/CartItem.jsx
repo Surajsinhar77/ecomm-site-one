@@ -1,20 +1,37 @@
 import React from 'react'
 import api from '../api/axios.instance'
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function CartItem({productId}) {
-    console.log("This is Product Id ",productId.productId)
+    //For Notification 
+    const notify = async(message)=>{
+        console.log(message)
+        const  Noti =()=>{
+            toast.success(message, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            })
+        }
+        setTimeout(()=>{
+            Noti();
+        },500)
+    }
+
 
     const[product, setProduct] =useState();
+
     useEffect(()=>{
-        api.post(`/getProduct/${productId.productId}`, {id:productId.productId} ).then((res)=>{
+        api.post(`/getProduct/${productId.productId}`, {id:productId.productId}).then((res)=>{
             setProduct(res.data);
         }).catch((err)=>{
             console.log(err.message)
         })
-    },[product])
+        console.log("asda")
+    },product)
 
-    console.log("product is Undifine : ",product)
     if(!product){
         return (<div>Loding...</div>)
     }
@@ -23,8 +40,9 @@ function CartItem({productId}) {
         e.preventDefault();
         console.log(productId.productId)
         api.post(`/cart/removeItem/${productId.productId}`, {id:productId.productId}).then((res)=>{
-            console.log(res.data);
+            notify("Item is sucessfull Remove From Cart")
         }).catch((err)=>{
+            notify(err.message);
             console.log(err.message)
         })
     }

@@ -3,7 +3,7 @@ const dataBaseUrl = require('./config')
 
 
 const connectionFuntion = ()=>{
-    mongoose.connect(dataBaseUrl.ProductionDatabase)
+    mongoose.connect(dataBaseUrl.loaclDatabase)
     .then(()=>{
         console.log("Database is sucessfully Connected")
     }).catch((err)=>{

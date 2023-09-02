@@ -5,19 +5,34 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 const Star = () => <span className="star">⭐</span>;
 const BlankStar = () => <span className="star">☆</span>;
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProductDetail() {
     const { _id } = useParams();
     console.log("This is the id :",_id);
     const [product, setProduct] = useState();
+    
+    // For Notification 
+    const notify = async(message)=>{
+        const  Noti =()=>{
+            toast.success(message, {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 3000,
+            })
+        }
+        setTimeout(()=>{
+            Noti();
+        },1000)
+    }
 
     // for rating 
     const addToCartFunction = (e) =>{
         e.preventDefault();
         api.post(`/cart/addToCart/${_id}`, {productId:_id, quantity:1}).then((res)=>{
-            console.log(res)
-            console.log("item SucessFull Added to cart");
+            notify("Item SucessFull Added to cart");
         }).catch((err)=>{
+            notify(err.message);
             console.log(err.message)
         })
     } 
@@ -94,6 +109,7 @@ function ProductDetail() {
                     <button className='wishlist border border-gray-500 px-5 py-3 mr-3 bg-white rounded text-gray-700 my-4 hover:bg-red-600 hover:text-white'><i class="fa fa-heart-o fa-lg" aria-hidden="true"></i></button>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     )
 }

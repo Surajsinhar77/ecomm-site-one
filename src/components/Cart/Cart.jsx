@@ -3,16 +3,26 @@ import CartItem from './CartItem'
 import './cart.css'
 import api from '../api/axios.instance'
 import { useEffect, useState } from 'react'
+import {getItem} from '../../components/AuthPage/AuthContext';
 
 function Cart() {  
     const [cartProduct, getCartData] =useState([]);
-    useEffect(()=>{
+    const {cartItem,setItem} = getItem();
+
+    const getData = () =>{
         api.get('/cart/cartItems').then((res)=>{
             getCartData(res.data)
+            setItem(cartProduct.length);
         }).catch((err)=>{
             console.log(err);
         })
-    },[cartProduct])
+    }
+
+    useEffect(()=>{
+        getData()
+    },cartProduct)
+
+    
 
     if(!cartProduct){
         <>
