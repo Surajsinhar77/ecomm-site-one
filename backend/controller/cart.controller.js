@@ -24,24 +24,24 @@ const addToCart = async(req, res)=>{
         }
     }catch(err){
         console.log(err.message);
-        res.json(err.message)
+        return res.json(err.message)
     }
 }
 
 const getCartItem = async(req, res) =>{
     const data = await cartModel.find();
-    console.log(data);
-    res.json(data);
+    return res.json(data);
 }
 
 const removeFromCart = async(req, res)=>{
     const _id = req.body;
-    console.log(_id);
+    
     try{
         const result = await cartModel.deleteOne({productId:_id.id});
         res.json(result);
     }catch(err){
         console.log(err.message);
+        res.json({msg : err});
     }
 }
 

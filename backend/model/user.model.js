@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const userScheme = ()=>{
-    const Schema = mongoose.Schema({
+    const Schema = new mongoose.Schema({
         fullname:{
             type: String,
             required: true
         },
         phoneno:{
-            type:Number,
+            type:String,
             require:true,
             unique: true,
         },

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import api from '../api/axios.instance'
 import {useAuth} from './AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,7 +11,7 @@ function RegistrationForm() {
     const [genotp, setGenotp] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState("");
-    const [userData, setUserdata] = useState({});
+    const [userData, setUserdata] = useState();
 
     const [email,setEmail] = useState();
     const [fullname,setFullname]  = useState();      
@@ -39,15 +39,12 @@ function RegistrationForm() {
     //     cnfpassword:'',
     // });
 
-
-
         const showFlashMessage = () => {
             setIsVisible(true);
             setTimeout(() => {
                 setIsVisible(false);
             }, 4000); // Flash message disappears after 3 seconds (adjust as needed)
         };
-
 
     // const handleInputChange = (e) => {
     //     e.preventDefault()
@@ -76,8 +73,7 @@ function RegistrationForm() {
 
     const handelUserData = (e) => {
         e.preventDefault()
-
-        setUserdata({
+        const alldaat =  {
             fullname:fullname, 
             email:email, 
             phoneno:phoneno, 
@@ -87,20 +83,20 @@ function RegistrationForm() {
             state:state, 
             pincode:pincode, 
             password:password
-        });
-        console.log("clicked");
+        }
+
+        
 
         if(password != cnfpassword){
             console.log("Password don't match");
             notify("Password not Match ");
             return 
         }else{
-        
             try{
-                console.log(userData)
-                api.post('/register', userData).then((res)=>{
+                api.post('/register', alldaat).then((res)=>{
                     setMessage(res.data.message);
                     notify(message);
+                    // navigate('/')
                 }).catch((err)=>{
                     notify(err.response.data.message);
                     console.log(err.response.data.message);

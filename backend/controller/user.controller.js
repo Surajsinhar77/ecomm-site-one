@@ -6,22 +6,28 @@ const parms = require('./parms.json')
 const userModel = require('../model/user.model')
 
 const registerUser = async(req, res)=>{
+        const {fullname, phoneno,address,city, country,state, pincode ,email, password} = req.body;
     try {
-        const {fullname, phoneno,address,city, country,state, pincode ,email, password } = req.body;
-    
         // Check if the user already exists
         const existingUser = await userModel.findOne({ $or: [{ fullname }, { email }] });
         if (existingUser) {
             return res.status(409).json({ message: 'User already exists' });
         }
     
-        // Hash the password before saving it
-        const hashedPassword = await bcrypt.hash(password, 10);
-    
-        // Create a new user with the hashed password
-        const user = new userModel({ fullname, phoneno,address,city, country,state, pincode ,email, password:hashedPassword });
-        await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        
+        const hashedPassword =await bcrypt.hash(password, 10);
+
+        const user = new userModel({ 
+            fullname:fullname, 
+            phoneno:phoneno,
+            address :`${address} ${city} ${country} ${state} ${pincode}`, 
+            pincode:pincode,
+            email:email, 
+            password : hashedPassword,
+        });
+
+        const result = await user.save();
+        return res.status(201).json({ message: 'User registered successfully' ,data : result});
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });
@@ -32,6 +38,7 @@ const login = async(req, res) =>{
     try{
         const userInfo = req.body;
         const userCheack = await userModel.findOne({email:req.body.email});
+
         if(userCheack){
             bcrypt.compare(userInfo.password, userCheack.password).then((result)=>{
                 if(result){
