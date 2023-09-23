@@ -7,6 +7,7 @@ import {getItem} from './AuthPage/AuthContext';
 
 function Navbar() {
     const { isLoggedIn, logout} = useAuth();
+    
     const navigate = useNavigate();
     const handelLogout=()=>{
         logout();
@@ -33,17 +34,19 @@ function Navbar() {
                                 <span className='w-7 h-7 rounded-full  bg-slate-400 text-red-600'>{cartItem}</span>
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart 
                                 </Link>
-                                {isLoggedIn ? 
-                                    <>
-                                    <Link onClick={handelLogout} className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</Link>
-                                    <Link to="/profile" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"><i class="fa fa-user-circle" aria-hidden="true"></i> Profile </Link>
-                                    </>
-                                :
+                                {!isLoggedIn ? 
+                                    
                                     <>
                                         <Link to='/signup' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign Up</Link>
                                         <Link to='/login' className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
                                     </>
+                                    :
+                                    <>
+                                    <Link to="/profile" className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium"><i class="fa fa-user-circle" aria-hidden="true"></i> Profile </Link>
+                                    <Link onClick={handelLogout} className="text-bkack hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</Link>
                                     
+                                    </>
+                                
                                 }
 
                             </div>

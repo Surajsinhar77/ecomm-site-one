@@ -1,7 +1,5 @@
 // AuthContext.js
 import React, { createContext, useContext, useState } from 'react';
-
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -13,16 +11,24 @@ export const AuthProvider = ({ children }) => {
         return localStorage.getItem('cartItem') > 0;
     });
 
+    const [userData, setUserData] =useState(() => {
+        const storedUserData = localStorage.getItem('userData');
+        return storedUserData ? JSON.parse(storedUserData) : null;
+    });
 
-    const login = () => {
-        // Perform login logic (e.g., set tokens, user info)
+
+    const login = (prop) => {
+        console.log(prop);
+        setUserData(prop);
         setIsLoggedIn(true);
+        localStorage.setItem('userData',JSON.stringify(prop));
         localStorage.setItem('isLoggedIn',"true");
     };
 
     const logout = () => {
-        // Perform logout logic (e.g., clear tokens, user info)
+        setUserData(null);
         setIsLoggedIn(false);
+        localStorage.removeItem('userData');
         localStorage.removeItem('isLoggedIn');
     };
     
@@ -32,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout , cartItem , setItem}}>
+        <AuthContext.Provider value={{ isLoggedIn, login, logout , cartItem , setItem, userData}}>
         {children}
         </AuthContext.Provider>
     );
