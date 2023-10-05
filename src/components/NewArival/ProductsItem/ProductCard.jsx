@@ -33,7 +33,7 @@ function ProductCard({product}) {
         <div>
             <div className="w-80 mx-4 mb-7 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <Link to={`/Productdetail/${product._id}`}>
-                    <img className="p-5 rounded-t-lg" src={baseImgAddress+product.mainImage} alt="product image" />
+                    <img className="p-5 rounded-t-lg object-cover" src={baseImgAddress+product.mainImage} alt="product image" />
                 </Link>
                 <div className="px-5 pb-5">
                     <a href="#">

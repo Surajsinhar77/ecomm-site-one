@@ -71,7 +71,7 @@ function ProductDetail() {
             </div>
             
             <div className="mainImage mr-4 ml-3">
-                <img className='h-5/6' src={`../../../../public/productImage/${product.mainImage}`} alt="" />
+                <img className='h-5/6 object-cover' src={`../../../../public/productImage/${product.mainImage}`} alt="" />
             </div>
             <div className="productInfo">
                 <h2 className='text-5xl font-bold'>{product.productName} </h2>

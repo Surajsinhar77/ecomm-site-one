@@ -14,7 +14,7 @@ const Crousal = ({banners}) => {
         >
             {banners.map((banner, index) => (
                 <div key={index} className="w-full h-96 flex items-center justify-center">
-                    <img src={banner.imageUrl} alt={banner.altText} className="max-h-fit max-w-full" />
+                    <img src={banner.imageUrl} alt={banner.altText} className="max-h-fit max-w-full object-cover" />
                     {/* <span className='absolute'> */}
                         <h1 className='absolute text-7xl font-bold text-white' style={{WebkitTextStroke:"1px",WebkitTextStrokeColor:"green"}}>The Fresh Vegetiabls is Here</h1>
                     {/* </span> */}
