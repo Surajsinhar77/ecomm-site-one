@@ -98,7 +98,8 @@ function RegistrationForm() {
                     notify(message);
                     // navigate('/')
                 }).catch((err)=>{
-                    notify(err.response.data.message);
+                    console.log(err.message);
+                    notify(err.response?.data?.message);
                     console.log(err.response.data.message);
                 })
             }catch(err){
