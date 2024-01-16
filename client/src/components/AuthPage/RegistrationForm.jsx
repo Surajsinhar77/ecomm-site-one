@@ -98,7 +98,7 @@ function RegistrationForm() {
                     notify(message);
                     // navigate('/')
                 }).catch((err)=>{
-                    console.log(err.message);
+                    console.log(err);
                     notify(err.response?.data?.message);
                     console.log(err.response.data.message);
                 })
