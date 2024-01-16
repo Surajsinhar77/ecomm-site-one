@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const dataBaseUrl = require('./config')
-
 
 const connectionFuntion = ()=>{
-    mongoose.connect(dataBaseUrl.loaclDatabase)
+    const url = process.env.DATABASE_URL;
+    mongoose.connect(url)
     .then(()=>{
         console.log("Database is sucessfully Connected")
     }).catch((err)=>{

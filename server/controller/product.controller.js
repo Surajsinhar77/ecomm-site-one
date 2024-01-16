@@ -22,9 +22,6 @@ const addProducts = async(req, res)=>{
     }
 }
 
-// const updateProductData = (req, res) =>{
-    
-// }
 
 const getData = async(req, res) =>{
     const data = await productModel.find({});

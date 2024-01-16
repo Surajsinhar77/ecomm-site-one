@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt')
 const twilio = require('twilio');
 const parms = require('./parms.json')
 
-// This is the model import for user 
 const userModel = require('../model/user.model')
 
 const registerUser = async(req, res)=>{
